@@ -1,0 +1,16 @@
+did the Dow rise or fall?
+how much did the Dow rise?
+how much did the Dow drop?
+how much did the S&P drop?
+how much did the Dow Jones Industrials close at?
+what did Walt Disney open at?
+did Walt Disney rise or fall?
+did Merrill Lynch rise or fall?
+did IBM go up or down?
+did Delta rise or fall?
+how much did IBM close at?
+how much did Delta close at?
+how much did IBM go up?
+how much did Delta go up?
+how much did Delta go down?
+how much did IBM fall?
