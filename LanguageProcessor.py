@@ -233,6 +233,9 @@ class LanguageProcessor(object):
         return synsets_list
         """
         synsets_list = []
+        if word == 'fall' or word == 'drop' or word == 'down' :
+            synsets_list.append('lower')
+            synsets_list.append('down')
         if wn.synsets(word):
             for synset in wn.synsets(word):
                 for lemma_name in synset.lemma_names():
@@ -262,10 +265,11 @@ class LanguageProcessor(object):
                 #print(qw)
                 #print(ne_text)
                 if qw in ne_text or ne_text in qw:
-                    print qw, ne_text
+                    #print qw, ne_text
                     for ind in indexes_ne_to_sent_text[ne_text]:
-                        print ind
-                        idx_sent_list.append(ind)
+                        #print ind
+                        if ind not in idx_sent_list:
+                            idx_sent_list.append(ind)
                     
         return idx_sent_list
 
@@ -279,7 +283,7 @@ class LanguageProcessor(object):
         Varibales:
             key_word_idx (int) - the position of the key word in the sentence
         """
-        #print(idx_sent_list, key_word)
+        print(idx_sent_list, key_word)
         if key_word in wd_tokenized_sents[idx_sent_list]:
             key_word_idx = wd_tokenized_sents[idx_sent_list].index(key_word)
         else:
@@ -297,6 +301,7 @@ class LanguageProcessor(object):
         """
         porter = nltk.PorterStemmer()
         lancaster = nltk.LancasterStemmer()
+        print cnstrd_word_syn
         for cw in cnstrd_word_syn:
             cw_seperate = []
             if '_' in cw:
@@ -312,19 +317,20 @@ class LanguageProcessor(object):
             for sent in wd_in_sent[key_wd_idx:]:
                 #print(cw)
                 #print(cw, sent)
-                
+                #print sent
+                """
                 if cw_seperate:
                     for c_s in cw_seperate:
                         if porter.stem(c_s.lower()) == porter.stem(sent.lower()) or lemma(c_s) == lemma(sent): #or sent.lower() in cw.lower() or lemma():
-                            #print("!!!!!!!!")
-                            #print(cw, sent)
-                            #print(wd_in_sent.index(sent))
+                            print("!!!!!!!!")
+                            print(cw, sent)
+                            print(wd_in_sent.index(sent))
                             return wd_in_sent.index(sent)
-            
+                """
                 if porter.stem(cw.lower()) == porter.stem(sent.lower()) or lemma(cw) == lemma(sent): #or sent.lower() in cw.lower() or lemma():
-                    #print("!!!!!!!!")
-                    #print(cw, sent)
-                    #print(wd_in_sent.index(sent))
+                    print("!!!!!!!!")
+                    print(cw, sent)
+                    print(wd_in_sent.index(sent))
                     return wd_in_sent.index(sent)
                 """
                 elif cw_seperate:
