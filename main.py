@@ -54,12 +54,12 @@ def main():
     pos_tag_sents = processor.pos_tag(word_tokenized_sents)
     # get the name entity in the text
     name_entity_in_text = processor.get_ne(pos_tag_sents, sents, bigram_chunker, 'T')
-    print name_entity_in_text
+    #print name_entity_in_text
     # get the name entity of the text in plain    
     plain_ne_in_text = processor.get_plain_ne_in_text(name_entity_in_text) 
     # get the map between name entity and index of the sentence that includes the name entity
     index_ne_to_sent_text = processor.set_index_ne_to_sent(name_entity_in_text)
-    print index_ne_to_sent_text
+    #print index_ne_to_sent_text
         
     while(True):
         if args.interactive:
@@ -115,7 +115,7 @@ def main():
                     # 'CD' is the pos tag of the number
                     question_dict[pos]['ans_type'] = 'CD'
             pos += 1
-        #print(question_dict)
+        print(question_dict)
 
         #Extract the answer
     
@@ -128,9 +128,9 @@ def main():
             q_key_word_syn = processor.get_syn(q_key_word)
             #print(q_key_word_syn)    
             idxs_sent_with_q_kw = processor.search_key_word([q_key_word], plain_ne_in_text, index_ne_to_sent_text)
-            print(idxs_sent_with_q_kw)
-            for i in idxs_sent_with_q_kw:
-                print sents[i]
+            #print(idxs_sent_with_q_kw)
+            #for i in idxs_sent_with_q_kw:
+                #print sents[i]
             q_constrainted_words = question_dict[q_idx]['constrainted_word']
     
             # 'or' question
@@ -179,21 +179,21 @@ def main():
                 q_constrainted_word_syn = processor.get_syn(q_constrainted_words[0])
                 #print(q_constrainted_word_syn)
                 for idx_sent_with_q_kw in idxs_sent_with_q_kw:
-                    #print(word_tokenized_sents[idx_sent_with_q_kw])
+                    print(word_tokenized_sents[idx_sent_with_q_kw])
                     answer_key_word_idx2 = processor.get_key_word_idx(word_tokenized_sents, q_key_word, idx_sent_with_q_kw)
-                    #if q_key_word == 'S&P':
-                    #    answer_key_word_idx2 = 0
+                    if q_key_word == 'S&P':
+                        answer_key_word_idx2 = 0
                     if processor.search_answer(q_constrainted_word_syn, word_tokenized_sents[idx_sent_with_q_kw], answer_key_word_idx2):
                         idx_wd = processor.search_answer(q_constrainted_word_syn, word_tokenized_sents[idx_sent_with_q_kw], answer_key_word_idx2)
                         #idx_wd = 0
                         #print(pos_tag_sents[idx_sent_with_q_kw])
-                        anwser_scope = pos_tag_sents[idx_sent_with_q_kw][idx_wd-3:]
+                        anwser_scope = pos_tag_sents[idx_sent_with_q_kw][idx_wd-5:]
                         find_CD = False
                         for w_pos_tuple in anwser_scope:
                             if w_pos_tuple[1] == 'CD' or (w_pos_tuple[1] == 'TO' and find_CD):
                                 find_CD = True
                                 answer_of_question2.append(w_pos_tuple[0])
-                        if answer_of_question2:
+                        if answer_of_question2 and find_CD:
                             sources.append(sents[idx_sent_with_q_kw])  
                             index.append(idx_sent_with_q_kw)
                                   
