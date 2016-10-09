@@ -283,7 +283,7 @@ class LanguageProcessor(object):
         Varibales:
             key_word_idx (int) - the position of the key word in the sentence
         """
-        print(idx_sent_list, key_word)
+        #print(idx_sent_list, key_word)
         if key_word in wd_tokenized_sents[idx_sent_list]:
             key_word_idx = wd_tokenized_sents[idx_sent_list].index(key_word)
         else:
@@ -301,7 +301,7 @@ class LanguageProcessor(object):
         """
         porter = nltk.PorterStemmer()
         lancaster = nltk.LancasterStemmer()
-        print cnstrd_word_syn
+        #print cnstrd_word_syn
         for cw in cnstrd_word_syn:
             cw_seperate = []
             if '_' in cw:
@@ -328,9 +328,9 @@ class LanguageProcessor(object):
                             return wd_in_sent.index(sent)
                 """
                 if porter.stem(cw.lower()) == porter.stem(sent.lower()) or lemma(cw) == lemma(sent): #or sent.lower() in cw.lower() or lemma():
-                    print("!!!!!!!!")
-                    print(cw, sent)
-                    print(wd_in_sent.index(sent))
+                    #print("!!!!!!!!")
+                    #print(cw, sent)
+                    #print(wd_in_sent.index(sent))
                     return wd_in_sent.index(sent)
                 """
                 elif cw_seperate:
