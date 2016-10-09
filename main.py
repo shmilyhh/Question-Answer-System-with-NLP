@@ -115,7 +115,7 @@ def main():
                     # 'CD' is the pos tag of the number
                     question_dict[pos]['ans_type'] = 'CD'
             pos += 1
-        print(question_dict)
+        #print(question_dict)
 
         #Extract the answer
     
@@ -179,7 +179,7 @@ def main():
                 q_constrainted_word_syn = processor.get_syn(q_constrainted_words[0])
                 #print(q_constrainted_word_syn)
                 for idx_sent_with_q_kw in idxs_sent_with_q_kw:
-                    print(word_tokenized_sents[idx_sent_with_q_kw])
+                    #print(word_tokenized_sents[idx_sent_with_q_kw])
                     answer_key_word_idx2 = processor.get_key_word_idx(word_tokenized_sents, q_key_word, idx_sent_with_q_kw)
                     if q_key_word == 'S&P':
                         answer_key_word_idx2 = 0
